@@ -1,0 +1,27 @@
+version: "3.3"
+services:
+  backend:
+    build: backend/
+    volumes:
+      - ./backend:/app
+    # depends_on:
+    #   - db
+    # environment:
+    #   - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    #   - MYSQL_DATABASE=${MYSQL_DATABASE}
+    ports:
+      - "8000:8000"
+    command: gunicorn -w 1 -b :8000 app:app
+  nginx:
+    container_name: nginx
+    restart: always
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+  # db:
+  #   image: postgres:10
+  #   env_file: .env
+  #   expose:
+  #     - 5432

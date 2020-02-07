@@ -1,0 +1,14 @@
+## env variable
+.env
+
+## pycache
+__pycache__/
+*.pycache
+
+
+## IDE
+.vscode/
+
+
+## virtual env
+flask_py36/
