@@ -1,15 +1,27 @@
 version: "3.3"
 services:
-  backend:
-    build: backend/
+  home:
+    build: home/
+    # env_file: ./database.env #environment variable file
     volumes:
-      - ./backend:/app
+      - ./home:/app
     depends_on:
       - redis
     ports:
-      - "8000:8000"
+      - "5000:5000"
     restart: always
-    command: gunicorn -w 1 -b :8000 app:app
+    command: gunicorn -w 1 -b :5000 app:app
+  accounts:
+    build: accounts/
+    # env_file: ./database.env #environment variable file
+    volumes:
+      - ./accounts:/app
+    depends_on:
+      - redis
+    ports:
+      - "5001:5001"
+    restart: always
+    command: gunicorn -w 1 -b :5001 app:app
   nginx:
     container_name: nginx
     restart: always
@@ -17,8 +29,13 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - backend
+      - home
   redis:
     image: redis
-
+  # database:
+  #   image: postgres #if using an existing image
+  #   restart: always #what to do if container crashes
+  #   env_file: ./database.env
+  #   environment:
+  #     - POSTGRES_USER=root # specify individual env variables.
  
