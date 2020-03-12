@@ -14,7 +14,7 @@ services:
   accounts:
     build: accounts/
     # env_file: ./database.env #environment variable file
-    volumes:
+    volumes: 
       - ./accounts:/app
     depends_on:
       - redis
