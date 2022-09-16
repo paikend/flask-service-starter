@@ -23,7 +23,7 @@ itsdangerous==1.1.0
 Jinja2==2.10.3
 kombu==4.6.7
 limits==1.5
-Mako==1.1.1
+Mako==1.2.2
 MarkupSafe==1.1.1
 mccabe==0.6.1
 more-itertools==8.2.0
